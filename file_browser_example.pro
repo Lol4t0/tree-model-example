@@ -13,6 +13,7 @@ QT += widgets
 CONFIG += c++11
 }else {
 QMAKE_CXXFLAGS += -std=c++0x
+DEFINES +="'Q_UNREACHABLE()=(void)1'"
 }
 
 TARGET = file_browser_example
