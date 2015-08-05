@@ -237,7 +237,11 @@ void FilesystemModel::fetchMore(const QModelIndex &parent)
 	QDir dir = QDir(fileInfo.absoluteFilePath());
 	QFileInfoList children = dir.entryInfoList(QStringList(), QDir::AllEntries | QDir::NoDotAndDotDot, QDir::Name);
 
-	beginInsertRows(parent, 0, children.size() - 1);
+	int insrtCnt = children.size() - 1;
+	if (insrtCnt < 0) {
+		insrtCnt = 0;
+	}
+	beginInsertRows(parent, 0, insrtCnt);
 	parentInfo->children.reserve(children.size());
 	for (const QFileInfo& entry: children) {
 		NodeInfo nodeInfo(entry, parentInfo);
